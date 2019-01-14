@@ -1,0 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication5;
+/**
+ *
+ * @author Saad
+ */
+import java.sql.*;
+import java.io.IOException;
+public class JavaApplication5 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws IOException, SQLException {
+        // TODO code application logic here
+        String url="jdbc:mysql://localhost:3306/se";
+        String url1="jdbc:mysql://localhost:3306/cs";
+        String username = "root";
+        String pwd="";
+        Connection con = DriverManager.getConnection(url,username,pwd);
+        Connection con1 = DriverManager.getConnection(url1,username,pwd);
+        
+        String query="select Name from record1";
+        String query1="select Name from record2";
+        PreparedStatement pst = con.prepareStatement(query);
+        PreparedStatement pst1 = con1.prepareStatement(query1);
+        ResultSet rs = pst.executeQuery(query);
+        ResultSet rs1 = pst1.executeQuery(query1);
+        while(rs.next() && rs1.next()){
+          
+            if(rs.getString(1).equals(rs1.getString(1))){
+          System.out.println(rs.getString(1));
+           
+            }
+            
+        }
+         
+    }
+    
+}
